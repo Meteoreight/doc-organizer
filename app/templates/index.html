@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GMP Document Organizer</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>GMP Document Organizer</h1>
+  </header>
+
+  <section class="controls">
+    <div>
+      <input id="docNumberInput" placeholder="Document number" />
+      <button onclick="addDocument()">Register</button>
+    </div>
+    <div>
+      <input id="csvInput" type="file" accept=".csv" />
+      <button onclick="importCsv()">Import CSV</button>
+      <button onclick="window.location='/api/export'">Export CSV</button>
+    </div>
+    <div>
+      <input id="matchQuery" placeholder="Match search (number or name)" />
+      <button onclick="runMatchSearch()">Search</button>
+      <input id="semanticQuery" placeholder="Semantic search in body" />
+      <button onclick="runSemanticSearch()">Semantic</button>
+    </div>
+  </section>
+
+  <main>
+    <section class="list-panel">
+      <table>
+        <thead>
+          <tr>
+            <th onclick="sortBy('document_number')">Document Number</th>
+            <th onclick="sortBy('name')">Document Name</th>
+            <th onclick="sortBy('tags')">Tags</th>
+          </tr>
+        </thead>
+        <tbody id="docRows"></tbody>
+      </table>
+    </section>
+
+    <section class="detail-panel" id="detailPanel">
+      <h2>Document Detail</h2>
+      <div class="form-row"><label>Document Number</label><input id="detailNumber" disabled /></div>
+      <div class="form-row"><label>Name</label><input id="detailName" /></div>
+      <div class="form-row"><label>Tags</label><input id="detailTags" /></div>
+      <div class="form-row"><label>Summary</label><textarea id="detailSummary"></textarea></div>
+      <div class="form-row"><label>Veeva Link</label><input id="detailVeeva" /></div>
+      <div class="btns">
+        <button onclick="saveDetail()">Save</button>
+        <button onclick="regenerate()">Regenerate</button>
+        <button class="danger" onclick="deleteDoc()">Delete</button>
+      </div>
+      <div>
+        <h3>Semantic Hit Chunks</h3>
+        <ul id="chunkList"></ul>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
