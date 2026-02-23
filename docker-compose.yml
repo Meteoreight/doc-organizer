@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    container_name: gmp-doc-organizer
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./documents:/app/documents
